@@ -6,10 +6,20 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	<mvc:annotation-driven/>
-	<context:component-scan base-package="cm.duu">
-	</context:component-scan>
-	<bean class="java.util.Date"></bean>
+	 <mvc:annotation-driven/>
+	 
+<!-- 	 <mvc:resources location="/movies/" mapping="/movies/*"></mvc:resources> 
+	<mvc:resources location="/css/" mapping="/css/*"></mvc:resources> 
+	<mvc:resources location="/js/" mapping="/js/*"></mvc:resources> 
+	<mvc:resources location="/fonts/" mapping="/fonts/*"></mvc:resources> 
+	<mvc:resources location="/images/" mapping="/images/*"></mvc:resources>  -->
+	
+	<mvc:default-servlet-handler/>
+	 
+	 <!--springMvc 扫包   @Controller-->
+	<context:component-scan base-package="cm.duu" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan> 
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>

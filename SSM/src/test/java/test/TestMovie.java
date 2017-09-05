@@ -1,6 +1,7 @@
 package test;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,20 +13,28 @@ import cm.duu.entity.Movie;
 import cm.duu.service.MovieService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:mybatis-spring.xml","classpath:springDispatcherServlet.xml"})
+@ContextConfiguration(locations = {"classpath:mybatis-spring.xml"})
+//多个配置文件格式：@ContextConfiguration(locations = {"classpath:mybatis-spring.xml","classpath:springDispatcherServlet.xml"})
 public class TestMovie {
 	
 	@Autowired
 	private MovieService movieService;
-	@Autowired
-	private Date date;
 	
 	@Test
 	public void addMovie(){
+		
 		System.out.println("sss");
+		
 		Movie movie =new Movie();
-		movie.setMoviename("test");
-		movie.setMovieurl("sss");
-		movieService.addMovie(movie);
+		
+		movie.setMovietypedetail("喜剧");
+		movie.setMoviename("tegong");
+		
+		List<Movie> a=movieService.queryMovies(movie);
+		
+		a.forEach(System.out::println);
+
 	}
+	
+	
 }
