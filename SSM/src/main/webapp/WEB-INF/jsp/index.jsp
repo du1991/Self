@@ -253,35 +253,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="signin">
 					<a href="#small-dialog" class="play-icon popup-with-zoom-anim">登录</a>
 					<div id="small-dialog" class="mfp-hide">
-						<h3>Login</h3>
+						 <h3>Login</h3>
 						<div class="social-sits">
-							<div class="facebook-button">
-								<a href="#">Connect with Facebook</a>
-							</div>
-							<div class="chrome-button">
-								<a href="#">Connect with Google</a>
-							</div>
-							<div class="button-bottom">
-								<p>
-									New account? <a href="#small-dialog2"
-										class="play-icon popup-with-zoom-anim">Signup</a>
-								</p>
-							</div>
+							<img  src="/images/gm1.jpg">
 						</div>
 						<div class="signup">
-							<form>
+							<form action="login">
 								<input type="text" class="email"
 									placeholder="Enter email / mobile" required="required"
-									pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" /> <input
+									pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" name="username"/> 
+								<input
 									type="password" placeholder="Password" required="required"
 									pattern=".{6,}" title="Minimum 6 characters required"
-									autocomplete="off" /> <input type="submit" value="LOGIN" />
+									autocomplete="off" name="password"/> 									
+								<input type="submit" value="LOGIN" />
 							</form>
 							<div class="forgot">
 								<a href="#">Forgot password ?</a>
 							</div>
 						</div>
-						<div class="clearfix"></div>
+						<div class="clearfix"></div> 
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -442,7 +433,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</div>
 										<div class="resent-grid-info recommended-grid-info">
 											<h5>
-												<a href="single.html" class="title">${ss.getIntroduction() }</a>
+												<a href="single.html" class="title">${ss.getMoviename()}:${ss.getIntroduction() }</a>
 											</h5>
 											<div class="slid-bottom-grids">
 												<div class="slid-bottom-grid">

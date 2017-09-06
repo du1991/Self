@@ -1,6 +1,5 @@
 package test;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -10,7 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cm.duu.entity.Movie;
+import cm.duu.entity.User;
 import cm.duu.service.MovieService;
+import cm.duu.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:mybatis-spring.xml"})
@@ -18,23 +19,19 @@ import cm.duu.service.MovieService;
 public class TestMovie {
 	
 	@Autowired
-	private MovieService movieService;
+	private UserService userService;
 	
 	@Test
 	public void addMovie(){
 		
 		System.out.println("sss");
 		
-		Movie movie =new Movie();
-		
-		movie.setMovietypedetail("喜剧");
-		movie.setMoviename("tegong");
-		
-		List<Movie> a=movieService.queryMovies(movie);
-		
-		a.forEach(System.out::println);
+		User u = new User();
+		u.setUsername("tom");
+		u.setPassword("456");
+	System.out.println(userService.queryUserByName(u));
 
 	}
 	
-	
+
 }
