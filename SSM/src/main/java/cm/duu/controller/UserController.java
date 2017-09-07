@@ -2,14 +2,16 @@ package cm.duu.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import cm.duu.entity.User;
+import cm.duu.service.MovieService;
 import cm.duu.service.UserService;
 
 @Controller
@@ -18,19 +20,22 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping("/login")
-	public String login(@ModelAttribute("s") User user,
+	@ResponseBody
+	public Object login(@ModelAttribute("s") User user,
 			HttpServletRequest request){
-		if(userService.queryUserByName(user)){
-			request.getSession().setAttribute("user", user);
-			return "redirect:LoginSuccess";
-		}
-		return "forward:home";
+		return new Gson().toJson(userService.queryUserByName(user,request.getSession()));
 	}
 	
-	@RequestMapping("/LoginSuccess")
-	public String loginSuccessfully(){
+	@RequestMapping("/LoginSuccessful")
+	public String LoginSuccessful(){
 		return "LoginSuccessfully";
 	}
 	
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request){
+		System.out.println("hello");
+		userService.delSession(request.getSession());
+		return "redirect:home";
+	}
 	
 }

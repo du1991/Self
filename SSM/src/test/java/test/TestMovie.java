@@ -29,7 +29,7 @@ public class TestMovie {
 		User u = new User();
 		u.setUsername("tom");
 		u.setPassword("456");
-	System.out.println(userService.queryUserByName(u));
+	
 
 	}
 	

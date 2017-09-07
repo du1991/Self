@@ -11,7 +11,9 @@
 	content="My Play Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript">
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 </script>
 <!-- bootstrap -->
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css'
@@ -32,7 +34,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </head>
 <body>
-
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -44,25 +45,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="index.html"><h1>
-					<img src="images/logo.png"  alt="" />
+					<img src="images/logo.png" alt="" />
 				</h1></a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<div class="top-search">
 				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" placeholder="Search...">
+					<input type="text" class="form-control">
 					<input type="submit" value=" ">
 				</form>
 			</div>
 			<div class="header-top-right">
 				<div class="file">
+					<c:if test="${!empty user }"><span>欢迎${user.username }</span></c:if> 
 					<a href="upload.html">上传</a>
 				</div>
+				
 				<div class="signin">
+					<c:if test="${empty user }">
 					<a href="#small-dialog2" class="play-icon popup-with-zoom-anim">注册</a>
+					</c:if>
+					<c:if test="${!empty user }">
+					<a href="/logout" >退出</a>
+					</c:if>
 					<script type="text/javascript" src="js/modernizr.custom.min.js"></script>
-					<link href="css/popuo-box.css" rel="stylesheet" type="text/css"
-						media="all" />
+					<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
 					<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
 					<div id="small-dialog2" class="mfp-hide">
 						<h3>Create Account</h3>
@@ -75,16 +82,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 							<div class="button-bottom">
 								<p>
-									Already have an account? <a href="#small-dialog"
-										class="play-icon popup-with-zoom-anim">Login</a>
+									Already have an account? <a href="#small-dialog" class="play-icon popup-with-zoom-anim">Login</a>
 								</p>
 							</div>
 						</div>
 						<div class="signup">
 							<form>
-								<input type="text" class="email" placeholder="Mobile Number"
-									maxlength="10" pattern="[1-9]{1}\d{9}"
-									title="Enter a valid mobile number" />
+								<input type="text" class="email" placeholder="Mobile Number" maxlength="10" pattern="[1-9]{1}\d{9}" title="Enter a valid mobile number" />
 							</form>
 							<div class="continue-button">
 								<a href="#small-dialog3"
@@ -104,22 +108,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 							<div class="button-bottom">
 								<p>
-									Already have an account? <a href="#small-dialog"
-										class="play-icon popup-with-zoom-anim">Login</a>
+									Already have an account? <a href="#small-dialog" class="play-icon popup-with-zoom-anim">Login</a>
 								</p>
 							</div>
 						</div>
 						<div class="signup">
 							<form>
-								<input type="text" class="email" placeholder="Email"
-									required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?"
-									title="Enter a valid email" /> <input type="password"
-									placeholder="Password" required="required" pattern=".{6,}"
-									title="Minimum 6 characters required" autocomplete="off" /> <input
-									type="text" class="email" placeholder="Mobile Number"
-									maxlength="10" pattern="[1-9]{1}\d{9}"
-									title="Enter a valid mobile number" /> <input type="submit"
-									value="Sign Up" />
+								<input type="text" class="email" placeholder="Email" required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" title="Enter a valid email" /> 
+								<input type="password" placeholder="Password" required="required" pattern=".{6,}" title="Minimum 6 characters required" autocomplete="off" />
+								 <input type="text" class="email" placeholder="Mobile Number" maxlength="10" pattern="[1-9]{1}\d{9}" title="Enter a valid mobile number" /> 
+								 <input type="submit" value="Sign Up" />
 							</form>
 						</div>
 						<div class="clearfix"></div>
@@ -251,28 +249,50 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</script>
 				</div>
 				<div class="signin">
+					<c:if test="${empty user}">
 					<a href="#small-dialog" class="play-icon popup-with-zoom-anim">登录</a>
+					
+					</c:if>
 					<div id="small-dialog" class="mfp-hide">
-						 <h3>Login</h3>
+						<h3>Login</h3>
 						<div class="social-sits">
-							<img  src="/images/gm1.jpg">
+							<img src="/images/gm1.jpg">
 						</div>
 						<div class="signup">
-							<form action="login">
-								<input type="text" class="email"
-									placeholder="Enter email / mobile" required="required"
-									pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" name="username"/> 
-								<input
-									type="password" placeholder="Password" required="required"
-									pattern=".{6,}" title="Minimum 6 characters required"
-									autocomplete="off" name="password"/> 									
-								<input type="submit" value="LOGIN" />
-							</form>
+							<script type="text/javascript">
+								function login() {
+											$.ajax({
+												url : "/login",
+												dataType : "json",
+												data : {
+													"username" : $("#username")
+															.val(),
+													"password" : $("#password")
+															.val(),
+												},
+												success : function(result) {
+													if (result.tr) {
+														window.location = "home";
+													} else {
+														$("#error").html(
+																"用户或者密码错误！");
+													}
+												},
+												error : function() {
+													alert("error");
+												}
+											});
+								}
+							</script>
+							<p id=error style="color: red"></p>
+							<input type="text" class="email" id="username" placeholder="Enter email / mobile" required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" name="username" /> 
+							<input type="password" placeholder="Password" required="required" id="password" pattern=".{6,}" title="Minimum 6 characters required" autocomplete="off" name="password" /> 
+							<input type="button" value="LOGIN" onclick="login()" id="login" />
 							<div class="forgot">
 								<a href="#">Forgot password ?</a>
 							</div>
 						</div>
-						<div class="clearfix"></div> 
+						<div class="clearfix"></div>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -296,7 +316,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
 				<li><a href="shows.html" class="user-icon"><span
 						class="glyphicon glyphicon-home glyphicon-blackboard"
-						aria-hidden="true"></span>TV </a></li>		
+						aria-hidden="true"></span>TV </a></li>
 				<li><a href="#" class="menu1"><span
 						class="glyphicon glyphicon-film" aria-hidden="true"></span>电影<span
 						class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
@@ -304,7 +324,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<li><a href="movies.html">喜剧</a></li>
 					<li><a href="movies.html">科幻</a></li>
 					<li><a href="movies.html">动作</a></li>
-					<li><a href="movies.html">恐怖</a></li>				
+					<li><a href="movies.html">恐怖</a></li>
 				</ul>
 				<!-- script-for-menu -->
 				<script>
@@ -343,11 +363,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					});
 				});
 			</script>
-			<div class="side-bottom">				
+			<div class="side-bottom">
 				<div class="copyright">
-					<p>
-						Copyright &copy; 2015.Company name All rights reserved.
-					</p>
+					<p>Copyright &copy; 2015.Company name All rights reserved.</p>
 				</div>
 			</div>
 		</div>
@@ -421,33 +439,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li>
 								<div class="animated-grids">
 									<c:forEach items="${s }" var="ss">
-									<div class="col-md-3 resent-grid recommended-grid slider-first">
-										<div class="resent-grid-img recommended-grid-img">										
-											<a href="single.html"><img src="${ss.getMoviepicture() }" alt="" /></a>
-											<div class="time small-time slider-time">
-												<p>${ss.getRunningtime() }</p>
+										<div
+											class="col-md-3 resent-grid recommended-grid slider-first">
+											<div class="resent-grid-img recommended-grid-img">
+												<a href="single.html"><img
+													src="${ss.getMoviepicture() }" alt="" /></a>
+												<div class="time small-time slider-time">
+													<p>${ss.getRunningtime() }</p>
+												</div>
+												<div class="clck small-clck">
+													<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+												</div>
 											</div>
-											<div class="clck small-clck">
-												<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+											<div class="resent-grid-info recommended-grid-info">
+												<h5>
+													<a href="single.html" class="title">${ss.getMoviename()}:${ss.getIntroduction() }</a>
+												</h5>
+												<div class="slid-bottom-grids">
+													<div class="slid-bottom-grid">
+														<p class="author author-info">
+															<a href="#" class="author">${ss.getPublisher() }</a>
+														</p>
+													</div>
+													<div class="slid-bottom-grid slid-bottom-right">
+														<p class="views views-info">2,114,200 views</p>
+													</div>
+													<div class="clearfix"></div>
+												</div>
 											</div>
 										</div>
-										<div class="resent-grid-info recommended-grid-info">
-											<h5>
-												<a href="single.html" class="title">${ss.getMoviename()}:${ss.getIntroduction() }</a>
-											</h5>
-											<div class="slid-bottom-grids">
-												<div class="slid-bottom-grid">
-													<p class="author author-info">
-														<a href="#" class="author">${ss.getPublisher() }</a>
-													</p>
-												</div>
-												<div class="slid-bottom-grid slid-bottom-right">
-													<p class="views views-info">2,114,200 views</p>
-												</div>
-												<div class="clearfix"></div>
-											</div>
-										</div>
-									</div></c:forEach>
+									</c:forEach>
 									<div class="clearfix"></div>
 								</div>
 							</li>
@@ -483,7 +504,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 									<div class="clearfix"></div>
 								</div>
-							</li>						
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -545,7 +566,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										views</p></li>
 							</ul>
 						</div>
-					</div>			
+					</div>
 					<div class="clearfix"></div>
 				</div>
 			</div>
