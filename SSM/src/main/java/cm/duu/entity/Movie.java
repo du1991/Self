@@ -5,7 +5,6 @@ public class Movie {
 	private int id;
 	private String moviename;
 	private String movieurl;
-	
 	private String runningtime;
 	private String moviepicture;
 	private String introduction;

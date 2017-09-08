@@ -26,16 +26,4 @@ public class UserController {
 		return new Gson().toJson(userService.queryUserByName(user,request.getSession()));
 	}
 	
-	@RequestMapping("/LoginSuccessful")
-	public String LoginSuccessful(){
-		return "LoginSuccessfully";
-	}
-	
-	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request){
-		System.out.println("hello");
-		userService.delSession(request.getSession());
-		return "redirect:home";
-	}
-	
 }

@@ -57,17 +57,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="header-top-right">
 				<div class="file">
-					<c:if test="${!empty user }"><span>欢迎${user.username }</span></c:if> 
+					<span id="welcome" ></span>
 					<a href="upload.html">上传</a>
 				</div>
 				
 				<div class="signin">
-					<c:if test="${empty user }">
-					<a href="#small-dialog2" class="play-icon popup-with-zoom-anim">注册</a>
-					</c:if>
-					<c:if test="${!empty user }">
-					<a href="/logout" >退出</a>
-					</c:if>
+					<a href="#small-dialog2" class="play-icon popup-with-zoom-anim" id="register">注册</a>
+					<a  id="loginout" style="display:none" onclick="logout()">退出</a>
 					<script type="text/javascript" src="js/modernizr.custom.min.js"></script>
 					<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
 					<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
@@ -247,35 +243,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						});
 					</script>
-				</div>
-				<div class="signin">
-					<c:if test="${empty user}">
-					<a href="#small-dialog" class="play-icon popup-with-zoom-anim">登录</a>
 					
-					</c:if>
-					<div id="small-dialog" class="mfp-hide">
-						<h3>Login</h3>
-						<div class="social-sits">
-							<img src="/images/gm1.jpg">
-						</div>
-						<div class="signup">
-							<script type="text/javascript">
+					<script type="text/javascript">
 								function login() {
 											$.ajax({
 												url : "/login",
 												dataType : "json",
 												data : {
-													"username" : $("#username")
-															.val(),
-													"password" : $("#password")
-															.val(),
+													"username" : $("#username").val(),
+													"password" : $("#password").val(),
 												},
 												success : function(result) {
 													if (result.tr) {
-														window.location = "home";
+													$.magnificPopup.close();
+													$("#welcome").html("欢迎："+result.user).show();
+													$("#register").hide();
+													$("#logout").hide();
+													$("#loginout").show();
+													$("#error").html("");
 													} else {
-														$("#error").html(
-																"用户或者密码错误！");
+														$("#error").html("用户或者密码错误！").show();
 													}
 												},
 												error : function() {
@@ -283,8 +270,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												}
 											});
 								}
-							</script>
-							<p id=error style="color: red"></p>
+								
+								function logout(){
+									$("#welcome").hide();
+									$("#register").show();
+									$("#logout").show();
+									$("#loginout").hide();
+								}							
+								</script>
+				</div>
+				<div class="signin">
+					<a href="#small-dialog" class="play-icon popup-with-zoom-anim" id="logout">登录</a>			
+					<div id="small-dialog" class="mfp-hide">
+						<h3>Login</h3>
+						<div class="social-sits">
+							<img src="/images/gm1.jpg">
+						</div>
+						<div class="signup">							
+							<p id=error style="color: red;height:20px" ></p>
 							<input type="text" class="email" id="username" placeholder="Enter email / mobile" required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" name="username" /> 
 							<input type="password" placeholder="Password" required="required" id="password" pattern=".{6,}" title="Minimum 6 characters required" autocomplete="off" name="password" /> 
 							<input type="button" value="LOGIN" onclick="login()" id="login" />
@@ -438,7 +441,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<ul class="rslides" id="slider3">
 							<li>
 								<div class="animated-grids">
-									<c:forEach items="${s }" var="ss">
+									<c:forEach items="${s[\"comedy1\"]}" var="ss">
 										<div
 											class="col-md-3 resent-grid recommended-grid slider-first">
 											<div class="resent-grid-img recommended-grid-img">
@@ -476,7 +479,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="animated-grids">
 									<div class="col-md-3 resent-grid recommended-grid slider-first">
 										<div class="resent-grid-img recommended-grid-img">
-											<a href="single.html"><img src="images/c1.jpg" alt="" /></a>
+											<a href="single.html"><img src="images/t3.jpg" alt="" /></a>
 											<div class="time small-time slider-time">
 												<p>4:42</p>
 											</div>

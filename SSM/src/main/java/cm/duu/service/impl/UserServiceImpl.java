@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
 		 if(userDao.queryUserByName(user)!=null){
 			 map.put("tr", true);		
 			 session.setAttribute("user", userDao.queryUserByName(user));
+			 map.put("user", userDao.queryUserByName(user).getUsername());
 			 return map;
 		 }
 		 map.put("fa", false);
