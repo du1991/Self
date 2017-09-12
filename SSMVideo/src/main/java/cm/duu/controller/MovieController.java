@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cm.duu.entity.Movie;
@@ -18,6 +19,13 @@ import cm.duu.service.MovieService;
 public class MovieController {
 	@Autowired
 	private MovieService movieService;
+	
+	@RequestMapping("/showTV")
+	public ModelAndView showTv(@ModelAttribute("movie") Movie movie,@RequestParam("page") Integer nowpage){
+
+		return new ModelAndView("TV","map",movieService.queryMoviesByPage(movie, nowpage));
+	}
+	
 	
 	@RequestMapping("/home")
 	public ModelAndView showHome(){ 

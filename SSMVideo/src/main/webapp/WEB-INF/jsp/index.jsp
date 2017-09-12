@@ -316,9 +316,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<ul class="nav nav-sidebar">
 				<li class="active"><a href="index.html" class="home-icon"><span
 						class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
-				<li><a href="shows.html" class="user-icon"><span
-						class="glyphicon glyphicon-home glyphicon-blackboard"
-						aria-hidden="true"></span>TV </a></li>
+				<li><a href="/showTV?page=1&movietypedetail=TV" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-blackboard" aria-hidden="true"></span>
+					TV 			
+				</a></li>
 				<li><a href="#" class="menu1"><span
 						class="glyphicon glyphicon-film" aria-hidden="true"></span>电影<span
 						class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>

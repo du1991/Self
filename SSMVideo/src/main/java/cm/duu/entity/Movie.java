@@ -13,17 +13,17 @@ public class Movie {
 	private String movietypedetail;
 	private String publishtime;
 	
+	public Movie(){}
+	public Movie(String movietypedetail) {
+		this.movietypedetail = movietypedetail;
+	}
+	
 	public String getPublishtime() {
 		return publishtime;
 	}
 	public void setPublishtime(String publishtime) {
 		this.publishtime = publishtime;
 	}
-	public Movie(){}
-	public Movie(String movietypedetail) {
-		this.movietypedetail = movietypedetail;
-	}
-	
 	public String getRunningtime() {
 		return runningtime;
 	}

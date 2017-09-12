@@ -10,5 +10,6 @@ public interface MovieService {
 	public void addMovie(Movie movie);
 	public Map<String,List<Movie>> queryMovies(List<Movie> movietypes);
 	public List<Movie> queryByType(Movie movie);
+	public Map<String,Object> queryMoviesByPage(Movie movie,int nowpage);
 
 }

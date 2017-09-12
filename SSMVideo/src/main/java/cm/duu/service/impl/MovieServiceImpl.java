@@ -15,6 +15,39 @@ public class MovieServiceImpl implements MovieService{
 	@Resource
 	private MovieDao moviedao;
 	
+	//分页查询的Service层
+	public Map<String,Object> queryMoviesByPage(Movie movie,int nowpage){
+		
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		int count=moviedao.queryByType(movie);
+		
+		int pages ; // 总页数
+		if (count % 10 == 0) { // 计算总页数,总记录数和每页显示的数
+			pages = count / 10; // 对总页数赋值
+		} else {
+			pages = count / 10 + 1; // 对总页数赋值
+		}
+		if(nowpage<1||nowpage>pages){nowpage=1;}
+		map.put("pages", pages);
+		map.put("count",count);
+		StringBuffer sb = new StringBuffer(); // 实例化StringBuffer
+	
+		for (int i = 1; i <= pages; i++) { // 通过循环构建分页导航条
+			if (i == nowpage) {// 判断是否为当前页
+				map.put("mappingMovies", moviedao.queryMoviesByPage(movie.getMovietypedetail(), (i-1)*10, 10));
+				map.put("nowPage", i);
+				sb.append("『" + i + "』"); // 构建分页导航条
+			} else {
+				sb.append("<a href='/showTV?page=" + i + "&movietypedetail="+movie.getMovietypedetail()+"'>" + i + "</a>");
+			}
+			sb.append("　"); // 构建分页导航条
+		}
+	
+		map.put("bar", sb.toString()); 
+		return map;
+	}
+	
 	public List<Movie> queryByType(Movie movie){
 		
 		List<Movie> list=moviedao.queryMovies(movie);
