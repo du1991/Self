@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cm.duu.dao.MovieDao">
+
+	<!--  增加movies -->
+	<insert id="addMovie"  parameterType="Movie" >
+		insert into movies (moviename,movieurl) values (#{moviename},#{movieurl})
+	</insert>
+	<!-- 查询movies -->
+	<!-- <resultMap id="listMovie" type="Movie">
+        <id column="id" property="id" />
+        <result column="moviename" property="moviename" />
+        <result column="movieurl" property="movieurl" />
+        <result column="runningtime" property="runningtime" />
+        <result column="moviepicture" property="moviepicture" />
+        <result column="introduction" property="introduction" />
+        <result column="publisher" property="publisher" />
+        <result column="movietypehead" property="movietypehead" />
+        <result column="movietypedetail" property="movietypedetail" />
+    </resultMap> -->
+	<select id="queryMovies" parameterType="Movie" resultType="Movie" >
+		select * from movies where movietypedetail = #{movietypedetail}
+	</select>
+
+</mapper>
